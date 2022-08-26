@@ -7,7 +7,7 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.CalendarContract
-import android.util.Log
+import timber.log.Timber
 import java.util.*
 
 /**
@@ -43,6 +43,12 @@ class QueryHandler
             val resolver = context.contentResolver
             if (queryHandler == null) queryHandler = QueryHandler(resolver)
 
+            val projection = arrayOf(
+                CalendarContract.Calendars._ID,
+                CalendarContract.Calendars.CALENDAR_DISPLAY_NAME
+            )
+            Timber.e(" $TAG ===  $projection")
+
             queryHandler?.startQuery(
                 CALENDAR, ContentValues().apply {
                     put(CalendarContract.Events.TITLE, title)
@@ -50,7 +56,7 @@ class QueryHandler
                     put(CalendarContract.Events.DTEND, endTime)
                     put(CalendarContract.Events.DESCRIPTION, "JANGAN LUPA BAYAR ")
                     put(CalendarContract.Events.CALENDAR_ID, CALENDAR)
-                    Log.d(TAG, "Calendar query start")
+                    Timber.e(" $TAG === Calendar query start")
                 }, CalendarContract.Calendars.CONTENT_URI,
                 CALENDAR_PROJECTION, null, null, null
             )
@@ -71,13 +77,14 @@ class QueryHandler
         }
     }
 
-    override fun onQueryComplete(token: Int, cookie: Any?, cursor: Cursor) {
+    override fun onQueryComplete(token: Int, cookie: Any?, cursor: Cursor?) {
         // Use the cursor to move through the returned records
-        cursor.moveToFirst()
+        cursor?.moveToFirst()
 
         // Get the field values
-        val calendarID = cursor.getLong(CALENDAR_ID_INDEX)
-        Log.d(TAG, "Calendar query complete $calendarID")
+        val calendarID = cursor?.getLong(CALENDAR_ID_INDEX)
+        Timber.e(" $TAG === Calendar query complete $calendarID")
+
         val values = cookie as ContentValues
         values.put(CalendarContract.Events.CALENDAR_ID, calendarID)
         values.put(
@@ -89,7 +96,8 @@ class QueryHandler
     }
 
     override fun onInsertComplete(token: Int, cookie: Any?, uri: Uri) {
-        Log.d(TAG, "Insert complete " + uri.lastPathSegment)
+        Timber.e(" $TAG === Insert complete ${uri.lastPathSegment}")
+
         if (token == EVENT) {
             val eventID = uri.lastPathSegment?.toLong()
             val values = ContentValues()
@@ -104,13 +112,16 @@ class QueryHandler
     }
 
     override fun onDeleteComplete(token: Int, cookie: Any?, result: Int) {
-        Log.d(TAG, "DELETE complete $result")
+        Timber.e(" $TAG === DELETE complete $result")
     }
 
 
     // https://stackoverflow.com/a/57214292
-    private fun getCalendarId(context: Context) : Long? {
-        val projection = arrayOf(CalendarContract.Calendars._ID, CalendarContract.Calendars.CALENDAR_DISPLAY_NAME)
+    private fun getCalendarId(context: Context): Long? {
+        val projection = arrayOf(
+            CalendarContract.Calendars._ID,
+            CalendarContract.Calendars.CALENDAR_DISPLAY_NAME
+        )
 
         var calCursor = context.contentResolver.query(
             CalendarContract.Calendars.CONTENT_URI,
@@ -139,9 +150,7 @@ class QueryHandler
 
                 calName = calCursor.getString(nameCol)
                 calID = calCursor.getString(idCol)
-
-                Log.d(TAG,"Calendar name = $calName Calendar ID = $calID")
-
+                Timber.e(" $TAG === Calendar name = $calName Calendar ID = $calID")
                 calCursor.close()
                 return calID.toLong()
             }
