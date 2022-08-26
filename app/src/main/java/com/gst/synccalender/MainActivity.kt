@@ -1,14 +1,13 @@
 package com.gst.synccalender
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import com.gst.synccalender.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener {
-           QueryHandler.deleteEvent(applicationContext)
+        binding.fabDelete.setOnClickListener {
+            QueryHandler.deleteEvent(applicationContext)
         }
     }
 

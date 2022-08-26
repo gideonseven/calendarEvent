@@ -11,8 +11,7 @@ import java.util.*
  * https://www.cicil.co.id/
  */
 object CalendarHelper {
-
-//    https://ideone.com/DW4vDg
+//https://ideone.com/DW4vDg
     @Synchronized
     @Throws(ParseException::class, IndexOutOfBoundsException::class)
     fun parseRFC3339Date(dateString: String): Date {
@@ -76,35 +75,6 @@ object CalendarHelper {
         val calendar = Calendar.getInstance()
         try {
             calendar.time = parseRFC3339Date(dateString)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
-        return calendar
-    }
-
-    fun countDueDate(stringDate: String): Long {
-        val calInput: Calendar = parseRFC3339Calendar(stringDate)
-        val calNow: Calendar = convertToCalendar(
-            Calendar.getInstance()[Calendar.DAY_OF_MONTH],
-            Calendar.getInstance()[Calendar.MONTH] + 1,
-            Calendar.getInstance()[Calendar.YEAR]
-        )
-        return (calInput.time.time - calNow.time.time) / (24 * 60 * 60 * 1000)
-    }
-
-    fun convertToCalendar(day: Int, month: Int, year: Int): Calendar {
-        val pattern = "yyyy/MM/dd"
-        val data = "$year/$month/$day"
-        val calendar = Calendar.getInstance()
-        try {
-            val df = SimpleDateFormat(pattern, Locale.US)
-            df.timeZone = TimeZone.getTimeZone("UTC")
-            calendar.time = df.parse(data) as Date
-            calendar[Calendar.HOUR] = 0
-            calendar[Calendar.MINUTE] = 0
-            calendar[Calendar.SECOND] = 0
-            calendar[Calendar.MILLISECOND] = 0
-            return calendar
         } catch (e: ParseException) {
             e.printStackTrace()
         }
