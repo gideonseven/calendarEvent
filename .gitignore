@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+.idea/vcs.xml
+app/src/androidTest/java/com/gst/synccalender/ExampleInstrumentedTest.kt
+app/src/test/java/com/gst/synccalender/ExampleUnitTest.kt
