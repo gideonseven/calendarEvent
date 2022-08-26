@@ -18,7 +18,7 @@
         android:name=".CalenderApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".feature.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.SyncCalender.NoActionBar">
             <intent-filter>

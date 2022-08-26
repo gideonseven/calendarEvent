@@ -1,4 +1,4 @@
-package com.gst.synccalender
+package com.gst.synccalender.helper
 
 import java.text.ParseException
 import java.text.SimpleDateFormat

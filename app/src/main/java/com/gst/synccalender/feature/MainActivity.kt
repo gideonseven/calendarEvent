@@ -1,4 +1,4 @@
-package com.gst.synccalender
+package com.gst.synccalender.feature
 
 import android.os.Bundle
 import android.view.Menu
@@ -8,6 +8,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.gst.synccalender.QueryHandler
+import com.gst.synccalender.R
 import com.gst.synccalender.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

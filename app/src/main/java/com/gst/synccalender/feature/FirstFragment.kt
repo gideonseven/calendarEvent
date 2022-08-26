@@ -1,4 +1,4 @@
-package com.gst.synccalender
+package com.gst.synccalender.feature
 
 import android.Manifest
 import android.os.Bundle
@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.gst.synccalender.QueryHandler
 import com.gst.synccalender.databinding.FragmentFirstBinding
+import com.gst.synccalender.helper.CalendarHelper
 import timber.log.Timber
 
 
