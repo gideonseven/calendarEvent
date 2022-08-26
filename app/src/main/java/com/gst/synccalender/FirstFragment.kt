@@ -68,10 +68,10 @@ class FirstFragment : Fragment() {
     }
 
     private fun addEvent() {
-        //startDate = 26 August 2022 3AM UTC
-        //endDate = 27 August 2022 3AM UTC
-        val startDate = CalendarHelper.parseRFC3339Calendar("2022-08-26T3:00:00+00:00")
-        val endDate = CalendarHelper.parseRFC3339Calendar("2022-08-27T3:00:00+00:00")
+        //startDate = 26 August 2022 11AM UTC
+        //endDate = 27 August 2022 11AM UTC
+        val startDate = CalendarHelper.parseRFC3339Calendar("2022-08-26T11:00:00+00:00")
+        val endDate = CalendarHelper.parseRFC3339Calendar("2022-08-27T11:00:00+00:00")
         QueryHandler.insertEvent(
             context = requireContext(),
             startTime = startDate.timeInMillis,
