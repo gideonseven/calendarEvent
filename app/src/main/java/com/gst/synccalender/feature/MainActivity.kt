@@ -1,5 +1,7 @@
 package com.gst.synccalender.feature
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,7 +12,12 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.gst.synccalender.R
 import com.gst.synccalender.databinding.ActivityMainBinding
+import com.gst.synccalender.utils.network.Api
+import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.HttpUrl.Companion.toHttpUrl
+import timber.log.Timber
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -27,6 +34,23 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        //Manage the callback case:
+        var code = ""
+        var error = ""
+        val data: Uri? = intent.data
+        if (data != null && !data.scheme.isNullOrEmpty()) {
+            if (Api.REDIRECT_URI_ROOT == data.scheme) {
+                code = data.getQueryParameter(Api.CODE) ?: ""
+                error = data.getQueryParameter(Api.ERROR_CODE) ?: ""
+            }
+        } else {
+            getOauthChooseAccount()
+        }
+
+        Timber.e("=== *** code $code")
+        Timber.e("=== *** error $error")
+
 
         binding.fabDelete.setOnClickListener {
             //TODO CLICK FAB
@@ -53,5 +77,22 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    private fun getOauthChooseAccount() {
+        val authorizeURL = (Api.BASE_URL_OAUTH + "oauthchooseaccount").toHttpUrl().newBuilder()
+            .addQueryParameter("client_id", Api.CLIENT_ID)
+            .addQueryParameter("response_type", Api.CODE)
+            .addQueryParameter("redirect_uri", Api.REDIRECT_URI)
+            .addQueryParameter("scope", Api.API_SCOPE)
+            .build()
+
+        val i = Intent(Intent.ACTION_VIEW)
+        Timber.e("the url is : $authorizeURL")
+        i.data = Uri.parse(authorizeURL.toString())
+        i.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
+        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(i)
+        finish()
     }
 }

@@ -1,6 +1,7 @@
 package com.gst.synccalender
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 
@@ -9,6 +10,7 @@ import timber.log.Timber
  * gideon@cicil.co.id
  * https://www.cicil.co.id/
  */
+@HiltAndroidApp
 class CalenderApp : Application() {
 
     override fun onCreate() {
