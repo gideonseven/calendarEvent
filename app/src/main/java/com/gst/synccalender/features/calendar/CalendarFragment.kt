@@ -1,4 +1,4 @@
-package com.gst.synccalender.feature.calendar
+package com.gst.synccalender.features.calendar
 
 import android.os.Bundle
 import android.view.LayoutInflater

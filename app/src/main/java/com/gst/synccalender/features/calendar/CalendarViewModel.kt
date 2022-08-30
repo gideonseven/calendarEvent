@@ -1,6 +1,6 @@
-package com.gst.synccalender.feature.calendar
+package com.gst.synccalender.features.calendar
 
-import com.gst.synccalender.feature.calendar.CalendarContract.*
+import com.gst.synccalender.features.calendar.CalendarContract.*
 import com.gst.synccalender.utils.AppViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

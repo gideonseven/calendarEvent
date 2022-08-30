@@ -17,7 +17,7 @@
         android:theme="@style/AppNoBar"
         tools:targetApi="31">
         <activity
-            android:name=".feature.MainActivity"
+            android:name=".features.MainActivity"
             android:exported="true"
             android:theme="@style/AppNoBar">
             <intent-filter>

@@ -6,6 +6,6 @@ package com.gst.synccalender.utils.network
  * https://www.cicil.co.id/
  */
 sealed class RequestType : CoreRequestType() {
-    object GET_GALLERIES : RequestType()
+    object SUBMIT_CODE : RequestType()
     object GET_SEARCH_PHOTOS : RequestType()
 }

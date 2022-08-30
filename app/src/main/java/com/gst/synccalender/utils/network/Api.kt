@@ -11,7 +11,7 @@ object Api {
     const val VERSION = "version"
     const val AUTH_HEADER = "Authorization"
     const val BASE_URL = "https://www.googleapis.com/"
-    const val BASE_URL_OAUTH = "https://accounts.google.com/o/oauth2/v2/auth"
+    const val BASE_URL_OAUTH = "https://accounts.google.com/o/oauth2/v2/auth/"
     const val CLIENT_ID = "175437962012-qgcfcnq44a92sn19g6fpf1ha9vacd81p.apps.googleusercontent.com"
     const val REDIRECT_URI = "com.gst.synccalender:/oauth2redirect"
     const val REDIRECT_URI_ROOT = "com.gst.synccalender"

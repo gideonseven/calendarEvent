@@ -3,12 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_change_request"
-    app:startDestination="@+id/calendarFragment">
+    app:startDestination="@+id/authFragment">
 
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.gst.synccalender.feature.calendar.CalendarFragment"
+        android:name="com.gst.synccalender.features.calendar.CalendarFragment"
         android:label="CalendarFragment"
         tools:layout="@layout/fragment_calendar">
+    </fragment>
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.gst.synccalender.features.calendar.auth.AuthFragment"
+        android:label="AuthFragment"
+        tools:layout="@layout/fragment_auth">
     </fragment>
 </navigation>

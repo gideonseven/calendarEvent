@@ -21,6 +21,6 @@ interface BaseNetworkModel {
 data class SimpleNetworkModel(
     @Json(name = "status")
     override val status: String? = null,
-    @Json(name = "status_message")
+    @Json(name = "error")
     override val message: String? = null
 ) : BaseNetworkModel, Parcelable

@@ -1,4 +1,4 @@
-package com.gst.synccalender.feature
+package com.gst.synccalender.features
 
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment

@@ -1,4 +1,4 @@
-package com.gst.synccalender.feature.calendar
+package com.gst.synccalender.features.calendar
 
 import com.gst.synccalender.utils.UiEffect
 import com.gst.synccalender.utils.UiEvent

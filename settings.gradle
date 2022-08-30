@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='unsplash'
+rootProject.name='synccalendar'

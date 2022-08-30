@@ -1,4 +1,4 @@
-package com.gst.synccalender.api
+package com.gst.synccalender.data.remote.api
 
 import com.skydoves.sandwich.ApiResponse
 import okhttp3.ResponseBody
