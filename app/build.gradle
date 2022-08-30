@@ -1,90 +1,123 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-kapt'
-    id 'kotlin-android'
-    id 'kotlin-parcelize'
-    id 'org.jetbrains.kotlin.android'
-    id 'dagger.hilt.android.plugin'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'de.mannodermaus.android-junit5'
 
 android {
-    compileSdk 32
-
+    compileSdkVersion 32
+    buildToolsVersion "30.0.3"
     defaultConfig {
-        applicationId "com.gst.synccalender"
-        minSdk 21
-        targetSdk 32
+        applicationId "com.gst.calendar"
+        minSdkVersion 21
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
+            }
+        }
+        vectorDrawables.useSupportLibrary = true
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-
         debug {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationIdSuffix ".debug"
+            debuggable true
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+
+    // work-runtime-ktx 2.1.0 and above now requires Java 8
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = "1.8"
     }
     buildFeatures {
         viewBinding true
         dataBinding true
     }
-}
-
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation "androidx.core:core-ktx:$rootProject.androidCoreVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlinVersion"
+    // Dependencies for Android Support
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
-    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.lifecycleVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.lifecycleVersion"
-    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+    implementation "androidx.core:core-ktx:$rootProject.androidCoreVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutineVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.coroutineVersion"
 
-    //hilt
-    implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"
-    kapt "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"
-    implementation "com.paulrybitskyi:hilt-binder:$rootProject.hiltBinderVersion"
-    kapt "com.paulrybitskyi:hilt-binder-compiler:$rootProject.hiltBinderVersion"
+    // Annotation processor
+    // kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+    // alternately - if using Java8, use the following instead of lifecycle-compiler
+    implementation("androidx.lifecycle:lifecycle-common-java8:$rootProject.lifecycleVersion")
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion")
 
-    //sky doves
-    implementation "com.github.skydoves:sandwich:$rootProject.sandwitchVersion"
-    implementation "com.github.skydoves:bindables:$rootProject.bindableVersion"
+    // Dependencies for Glide
+    implementation("com.github.bumptech.glide:glide:$rootProject.glideVersion")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
 
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.gsonVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpCoreVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$rootProject.moshiConverterVersion"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$rootProject.coroutineAdapterVersion"
-    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpCoreVersion"
     api "com.squareup.moshi:moshi-kotlin:$rootProject.moshiVersion"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$rootProject.moshiVersion"
 
-    implementation "com.google.android.gms:play-services-auth:$rootProject.playServiceVersion"
-    implementation("com.google.api-client:google-api-client-android:$rootProject.apiClientVersion") {
-        exclude group: 'org.apache.httpcomponents'
-    }
-    implementation("com.google.apis:google-api-services-calendar:$rootProject.calendarVersion") {
-        exclude group: 'org.apache.httpcomponents'
-    }
-    implementation 'com.google.guava:guava:27.0.1-android'
+    // Tools
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+
+    implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"
+    kapt "com.google.dagger:hilt-compiler:$rootProject.hiltVersion"
+
+    implementation "com.paulrybitskyi:hilt-binder:$rootProject.hiltBinderVersion"
+    kapt "com.paulrybitskyi:hilt-binder-compiler:$rootProject.hiltBinderVersion"
+
+    implementation "com.airbnb.android:lottie:$rootProject.lottieVersion"
+
+    implementation "com.github.skydoves:sandwich:$rootProject.sandwitchVersion"
+    implementation "com.github.skydoves:bindables:$rootProject.bindlableVErsion"
+
+    // (Required) Writing and executing Unit Tests on the JUnit Platform
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$rootProject.jupiterVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$rootProject.jupiterVersion"
+
+    // (Optional) If you need "Parameterized Tests"
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$rootProject.jupiterVersion")
+
+    testImplementation("io.mockk:mockk:1.10.0")
+    testImplementation "io.mockk:mockk-agent-jvm:1.10.0"
+
+    androidTestImplementation "io.mockk:mockk-android:1.10.0"
+    androidTestImplementation "io.mockk:mockk-agent-jvm:1.10.0"
+
 }
 
 kapt {

@@ -17,3 +17,5 @@ local.properties
 app/src/androidTest/java/com/gst/synccalender/ExampleInstrumentedTest.kt
 app/src/test/java/com/gst/synccalender/ExampleUnitTest.kt
 .idea/misc.xml
+.idea/.name
+.idea/jarRepositories.xml

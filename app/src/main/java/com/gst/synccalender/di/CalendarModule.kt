@@ -1,8 +1,8 @@
 package com.gst.synccalender.di
 
 import android.content.Context
-import com.gst.synccalender.api.ApiOauth
 import com.gst.synccalender.api.ApiCalendar
+import com.gst.synccalender.api.ApiOauth
 import com.gst.synccalender.utils.network.Api.BASE_URL
 import com.gst.synccalender.utils.network.Api.BASE_URL_OAUTH
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
@@ -49,10 +49,11 @@ object CalendarModule {
     @Provides
     @Singleton
     @RetrofitWithOauth
-    fun provideRetrofitWithOauth(moshi: Moshi): Retrofit = Retrofit.Builder().baseUrl(BASE_URL_OAUTH)
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
-        .build()
+    fun provideRetrofitWithOauth(moshi: Moshi): Retrofit =
+        Retrofit.Builder().baseUrl(BASE_URL_OAUTH)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(ApiResponseCallAdapterFactory.create())
+            .build()
 
     @Provides
     @Singleton
@@ -94,7 +95,7 @@ object CalendarModule {
         @ApplicationContext context: Context,
         @OkHttpDefault okHttpClient: OkHttpClient,
         retrofit: Retrofit
-    ):ApiOauth {
+    ): ApiOauth {
         val cacheSize = 1024 * 1024
         val cache = Cache(context.cacheDir, cacheSize.toLong())
         val clientCache = okHttpClient.newBuilder()
@@ -102,11 +103,11 @@ object CalendarModule {
             .addInterceptor { chain ->
                 // for caching
                 val request = chain.request()
-                    request.newBuilder()
-                        .cacheControl(
-                            CacheControl.Builder().maxStale(7, TimeUnit.DAYS).build()
-                        )
-                        .build()
+                request.newBuilder()
+                    .cacheControl(
+                        CacheControl.Builder().maxStale(7, TimeUnit.DAYS).build()
+                    )
+                    .build()
                 chain.proceed(request)
             }
             .build()

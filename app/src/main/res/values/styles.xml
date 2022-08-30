@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/proxima_regular</item>
+    </style>
+
+    <style name="AppNoBar" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/proxima_regular</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+
+    <!-- Text -->
+<style name="TextContent" parent="Widget.MaterialComponents.TextView">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:fontFamily">@font/proxima_regular</item>
+    <item name="android:lineSpacingExtra">@dimen/_0sp</item>
+</style>
+
+<style name="TextContent.H1">
+<item name="android:textSize">@dimen/_44sp</item>
+</style>
+
+<style name="TextContent.H1.Light">
+<item name="fontFamily">@font/proxima_light</item>
+</style>
+
+<style name="TextContent.H1.Bold">
+<item name="fontFamily">@font/proxima_bold</item>
+</style>
+
+<style name="TextContent.H2">
+<item name="android:textSize">@dimen/_32sp</item>
+<item name="android:lineSpacingExtra">@dimen/_0sp</item>
+</style>
+
+<style name="TextContent.H2.Light">
+<item name="fontFamily">@font/proxima_light</item>
+</style>
+
+<style name="TextContent.H2.Bold">
+<item name="fontFamily">@font/proxima_bold</item>
+</style>
+
+<style name="TextContent.H3">
+<item name="android:textSize">@dimen/_24sp</item>
+<item name="android:lineSpacingExtra">@dimen/_2sp</item>
+</style>
+
+<style name="TextContent.H3.Light">
+<item name="fontFamily">@font/proxima_light</item>
+</style>
+
+<style name="TextContent.H3.Bold">
+<item name="fontFamily">@font/proxima_bold</item>
+</style>
+
+<style name="TextContent.H4">
+<item name="android:textSize">@dimen/_20sp</item>
+<item name="android:lineSpacingExtra">@dimen/_3sp</item>
+</style>
+
+<style name="TextContent.H4.Light">
+<item name="fontFamily">@font/proxima_light</item>
+</style>
+
+<style name="TextContent.H4.Bold">
+<item name="fontFamily">@font/proxima_bold</item>
+</style>
+
+<style name="TextContent.H5">
+<item name="android:textSize">@dimen/_18sp</item>
+<item name="android:lineSpacingExtra">@dimen/_5sp</item>
+</style>
+
+<style name="TextContent.H5.Light">
+<item name="fontFamily">@font/proxima_light</item>
+</style>
+
+<style name="TextContent.H5.Bold">
+<item name="fontFamily">@font/proxima_bold</item>
+</style>
+
+<style name="TextContent.H6">
+<item name="android:textSize">@dimen/_18sp</item>
+<item name="android:lineSpacingExtra">@dimen/_3sp</item>
+</style>
+
+<style name="TextContent.H6.Light">
+<item name="fontFamily">@font/proxima_light</item>
+</style>
+
+<style name="TextContent.H6.Bold">
+<item name="fontFamily">@font/proxima_bold</item>
+</style>
+
+<style name="TextContent.BL">
+<item name="android:textSize">@dimen/_16sp</item>
+<item name="android:lineSpacingExtra">@dimen/_2sp</item>
+</style>
+
+<style name="TextContent.BL.Light">
+<item name="fontFamily">@font/proxima_light</item>
+</style>
+
+<style name="TextContent.BL.Bold">
+<item name="fontFamily">@font/proxima_bold</item>
+</style>
+
+<style name="TextContent.BM">
+<item name="android:textSize">@dimen/_14sp</item>
+<item name="android:lineSpacingExtra">@dimen/_1sp</item>
+</style>
+
+<style name="TextContent.BM.Light">
+<item name="fontFamily">@font/proxima_light</item>
+</style>
+
+<style name="TextContent.BM.Bold">
+<item name="fontFamily">@font/proxima_bold</item>
+</style>
+
+<style name="TextContent.BS">
+<item name="android:textSize">@dimen/_12sp</item>
+</style>
+
+<style name="TextContent.BS.Light">
+<item name="fontFamily">@font/proxima_light</item>
+</style>
+
+<style name="TextContent.BS.Bold">
+<item name="fontFamily">@font/proxima_bold</item>
+</style>
+
+<style name="TextContent.BXS">
+<item name="android:textSize">@dimen/_10sp</item>
+<item name="android:lineSpacingExtra">@dimen/_2sp</item>
+</style>
+
+<style name="TextContent.BXS.Light">
+<item name="fontFamily">@font/proxima_light</item>
+</style>
+
+<style name="TextContent.BXS.Bold">
+<item name="fontFamily">@font/proxima_bold</item>
+</style>
+
+
+<style name="Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+<item name="android:textAppearance">@style/TextContent.BM.Bold</item>
+<item name="android:minWidth">@dimen/_200dp</item>
+<item name="android:layout_width">wrap_content</item>
+<item name="android:layout_height">@dimen/_44dp</item>
+<item name="android:textColor">@color/colorWhite</item>
+<item name="cornerRadius">@dimen/_8dp</item>
+
+<item name="iconGravity">textStart</item>
+<item name="iconSize">@dimen/_18sp</item>
+<item name="iconTint">@color/colorWhite</item>
+<item name="iconPadding">@dimen/_8dp</item>
+
+<item name="android:insetLeft">@dimen/_0dp</item>
+<item name="android:insetRight">@dimen/_0dp</item>
+<item name="android:insetTop">@dimen/_0dp</item>
+<item name="android:insetBottom">@dimen/_0dp</item>
+</style>
+    </resources>
