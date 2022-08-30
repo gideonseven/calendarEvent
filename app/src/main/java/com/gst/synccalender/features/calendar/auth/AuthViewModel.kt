@@ -55,7 +55,9 @@ class AuthViewModel @Inject constructor(
                     setState { copy(responseStateSubmitCode = it) }
                 },
                 onSuccess = { _, auth ->
-                    Timber.e("=== $auth")
+                    Timber.e("===  EXPIRED IN ${auth?.expiresIn}")
+                    Timber.e("===  ACCESS TOKEN ${auth?.accessToken}")
+                    Timber.e("===  REFRESH TOKEN ${auth?.refreshToken}")
                     setEffect { AuthEffect.NavigateToCalendarFragment }
                 },
                 onNotAuthorized = {
