@@ -11,12 +11,14 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.gst.synccalender.R
 import com.gst.synccalender.databinding.FragmentAuthBinding
 import com.gst.synccalender.databinding.ViewStateErrorBinding
 import com.gst.synccalender.features.calendar.auth.AuthContract.AuthEvent
 import com.gst.synccalender.features.calendar.auth.AuthContract.AuthEffect.NavigateToCalendarFragment
 import com.gst.synccalender.utils.AppFragment
+import com.gst.synccalender.utils.navigateSafe
 import com.gst.synccalender.utils.network.Api
 import com.gst.synccalender.utils.network.State
 import com.gst.synccalender.utils.network.handleResponseState
@@ -36,7 +38,6 @@ import timber.log.Timber
 class AuthFragment : AppFragment<FragmentAuthBinding>(R.layout.fragment_auth) {
 
     private val viewModel: AuthViewModel by viewModels()
-
     private val authorizeUrl: HttpUrl? =
         "https://accounts.google.com/o/oauth2/v2/auth".toHttpUrlOrNull()
             ?.newBuilder() //
@@ -140,6 +141,9 @@ class AuthFragment : AppFragment<FragmentAuthBinding>(R.layout.fragment_auth) {
             when(it){
                 is NavigateToCalendarFragment ->{
                     Timber.e("00000 IM READY TO NAVIGATE ")
+                    findNavController().navigateSafe(
+                        AuthFragmentDirections.actionGoToCalendar()
+                    )
                 }
                 else -> {
                     /** do nothing */

@@ -77,4 +77,14 @@ object CalendarModule {
         return retrofit.newBuilder().client(okHttpClient).build()
             .create(ApiOauth::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun providesApiCalendar(
+        @RetrofitWithOauth retrofit: Retrofit,
+        @OkHttpDefault okHttpClient: OkHttpClient
+    ): ApiCalendar {
+        return retrofit.newBuilder().client(okHttpClient).build()
+            .create(ApiCalendar::class.java)
+    }
 }

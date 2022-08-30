@@ -17,5 +17,14 @@
         android:name="com.gst.synccalender.features.calendar.auth.AuthFragment"
         android:label="AuthFragment"
         tools:layout="@layout/fragment_auth">
+
+        <action
+            android:id="@+id/action_go_to_calendar"
+            app:destination="@id/calendarFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_out_right"
+            app:popExitAnim="@anim/slide_in_right">
+        </action>
     </fragment>
 </navigation>

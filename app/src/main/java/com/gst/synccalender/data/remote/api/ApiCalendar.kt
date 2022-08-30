@@ -1,8 +1,11 @@
 package com.gst.synccalender.data.remote.api
 
+import com.gst.synccalender.data.remote.dto.RequestCalendar
+import com.gst.synccalender.utils.network.Api
 import com.skydoves.sandwich.ApiResponse
 import okhttp3.ResponseBody
-import retrofit2.http.GET
+import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -13,9 +16,10 @@ import retrofit2.http.Path
  * https://www.cicil.co.id/
  */
 interface ApiCalendar {
-    @GET("calendar/v3/users/me/calendarList")
-    suspend fun getCalendarList(): ApiResponse<ResponseBody>
-
     @POST("calendar/v3/calendars/{calendarId}/events")
-    suspend fun submitEvent(@Path("calendarId") calendarId: String = "primary"): ApiResponse<ResponseBody>
+    suspend fun submitEvent(
+        @Header(Api.AUTH_HEADER) token: String,
+        @Path("calendarId") calendarId: String = "primary",
+        @Body loginRequest: RequestCalendar
+    ): ApiResponse<ResponseBody>
 }
