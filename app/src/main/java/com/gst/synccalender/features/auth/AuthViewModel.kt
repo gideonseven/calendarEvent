@@ -1,8 +1,8 @@
-package com.gst.synccalender.features.calendar.auth
+package com.gst.synccalender.features.auth
 
 import androidx.databinding.Bindable
-import com.gst.synccalender.domain.usecase.oauth.IAuthUseCase
-import com.gst.synccalender.features.calendar.auth.AuthContract.*
+import com.gst.synccalender.domain.usecase.auth.IAuthUseCase
+import com.gst.synccalender.features.auth.AuthContract.*
 import com.gst.synccalender.utils.AppViewModel
 import com.gst.synccalender.utils.Constants
 import com.gst.synccalender.utils.network.*
@@ -28,6 +28,9 @@ class AuthViewModel @Inject constructor(
 
     @get:Bindable
     var mCode: String by bindingProperty(Constants.TEXT_BLANK)
+
+    @get:Bindable
+    var accessToken: String by bindingProperty(Constants.TEXT_BLANK)
 
     override fun createInitialState() = AuthState()
 
@@ -55,6 +58,7 @@ class AuthViewModel @Inject constructor(
                     setState { copy(responseStateSubmitCode = it) }
                 },
                 onSuccess = { _, auth ->
+                    accessToken = auth?.accessToken ?: Constants.TEXT_BLANK
                     Timber.e("===  EXPIRED IN ${auth?.expiresIn}")
                     Timber.e("===  ACCESS TOKEN ${auth?.accessToken}")
                     Timber.e("===  REFRESH TOKEN ${auth?.refreshToken}")

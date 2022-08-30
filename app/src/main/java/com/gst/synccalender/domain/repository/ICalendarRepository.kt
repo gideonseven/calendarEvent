@@ -1,10 +1,11 @@
 package com.gst.synccalender.domain.repository
 
-import com.gst.synccalender.data.remote.dto.TokenResponse
+import com.gst.synccalender.data.remote.dto.RequestCalendar
 import com.gst.synccalender.utils.network.Repository
 import com.gst.synccalender.utils.network.RequestType
 import com.gst.synccalender.utils.network.ResponseState
 import kotlinx.coroutines.flow.Flow
+import okhttp3.ResponseBody
 
 
 /**
@@ -12,12 +13,10 @@ import kotlinx.coroutines.flow.Flow
  * gideon@cicil.co.id
  * https://www.cicil.co.id/
  */
-interface IAuthRepository : Repository {
-    fun submitCodeForGettingToken(
+interface ICalendarRepository : Repository {
+    fun submitEvent(
         requestType: RequestType,
-        code: String,
-        clientId: String,
-        redirectUri: String,
-        grantType: String
-    ): Flow<ResponseState<RequestType, TokenResponse?>>
+        token: String,
+        calendar: RequestCalendar
+    ): Flow<ResponseState<RequestType, ResponseBody?>>
 }

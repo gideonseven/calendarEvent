@@ -1,4 +1,4 @@
-package com.gst.synccalender.features.calendar.auth
+package com.gst.synccalender.features.auth
 
 import com.gst.synccalender.domain.model.TokenWrapper
 import com.gst.synccalender.utils.UiEffect

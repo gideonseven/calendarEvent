@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.gst.synccalender.R
 import com.gst.synccalender.databinding.FragmentCalendarBinding
+import com.gst.synccalender.databinding.ViewStateErrorBinding
 import com.gst.synccalender.utils.AppFragment
+import com.gst.synccalender.utils.network.State
+import com.gst.synccalender.utils.network.handleResponseState
 import com.gst.synccalender.utils.network.observe
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +25,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class CalendarFragment : AppFragment<FragmentCalendarBinding>(R.layout.fragment_calendar) {
 
     private val viewModel: CalendarViewModel by viewModels()
+
+    private val args: CalendarFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +42,10 @@ class CalendarFragment : AppFragment<FragmentCalendarBinding>(R.layout.fragment_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-
+            viewModel.token = args.token
+            buttonAdd.setOnClickListener {
+                viewModel.setEvent(CalendarContract.CalendarEvent.SubmitCalendarEvent)
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.observe(
@@ -48,7 +57,24 @@ class CalendarFragment : AppFragment<FragmentCalendarBinding>(R.layout.fragment_
 
     private suspend fun handleState() {
         viewModel.uiState.collect { uiState ->
-
+            nonNullContext.handleResponseState(uiState.responseSubmitEvent,
+                getUiStateFlow(),
+                onLoading = {
+                    updateUIStateFlow(State.LOADING)
+                },
+                onFailed = { _, model ->
+                    updateUIStateFlow(State.ERROR)
+                    val bindingError = binding.viewState.getView(State.ERROR)?.let { it ->
+                        ViewStateErrorBinding.bind(it)
+                    }
+                    bindingError?.errorDescription?.text = model.message
+                    bindingError?.errorRetry?.setOnClickListener {
+                        viewModel.setEvent(
+                            CalendarContract.CalendarEvent.SubmitCalendarEvent
+                        )
+                    }
+                }
+            )
         }
     }
 

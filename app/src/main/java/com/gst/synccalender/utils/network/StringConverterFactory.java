@@ -25,6 +25,7 @@ public class StringConverterFactory extends Converter.Factory {
         }
         return null;
     }
+
     public Converter<?, RequestBody> requestBodyConverter(@NonNull Type type,
                                                           @NonNull Annotation[] parameterAnnotations,
                                                           @NonNull Annotation[] methodAnnotations,

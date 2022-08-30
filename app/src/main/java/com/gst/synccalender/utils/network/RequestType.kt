@@ -7,5 +7,5 @@ package com.gst.synccalender.utils.network
  */
 sealed class RequestType : CoreRequestType() {
     object SUBMIT_CODE : RequestType()
-    object GET_SEARCH_PHOTOS : RequestType()
+    object SUBMIT_EVENT : RequestType()
 }

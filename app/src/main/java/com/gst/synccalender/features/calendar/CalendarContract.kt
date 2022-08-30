@@ -1,5 +1,6 @@
 package com.gst.synccalender.features.calendar
 
+import com.gst.synccalender.domain.model.CalendarWrapper
 import com.gst.synccalender.utils.UiEffect
 import com.gst.synccalender.utils.UiEvent
 import com.gst.synccalender.utils.UiState
@@ -13,16 +14,15 @@ import com.gst.synccalender.utils.network.ResponseState
  * https://www.cicil.co.id/
  */
 class CalendarContract {
-
     sealed class CalendarEffect : UiEffect {
-
+        object ShowToast : CalendarEffect()
     }
 
     sealed class CalendarEvent : UiEvent {
-
+        object SubmitCalendarEvent : CalendarEvent()
     }
 
     data class CalendarState(
-        val responseStateGalleries: ResponseState<RequestType, List<Any>?> = ResponseState.Empty,
+        val responseSubmitEvent: ResponseState<RequestType, CalendarWrapper?> = ResponseState.Empty
     ) : UiState
 }

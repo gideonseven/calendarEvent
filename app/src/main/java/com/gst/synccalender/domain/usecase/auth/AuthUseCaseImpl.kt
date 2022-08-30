@@ -1,4 +1,4 @@
-package com.gst.synccalender.domain.usecase.oauth
+package com.gst.synccalender.domain.usecase.auth
 
 import com.gst.synccalender.domain.model.TokenWrapper
 import com.gst.synccalender.domain.repository.IAuthRepository

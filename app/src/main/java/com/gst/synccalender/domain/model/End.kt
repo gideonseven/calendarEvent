@@ -9,6 +9,6 @@ import com.squareup.moshi.Json
  * https://www.cicil.co.id/
  */
 data class End(
-    @Json(name="dateTime")
+    @Json(name = "dateTime")
     val dateTime: String
 )

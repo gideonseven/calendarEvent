@@ -1,7 +1,6 @@
 package com.gst.synccalender.utils
 
 
-
 import android.net.Uri
 import android.os.Bundle
 import androidx.annotation.IdRes

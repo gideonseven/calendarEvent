@@ -4,7 +4,6 @@ import android.content.Context
 import com.gst.synccalender.data.remote.api.ApiCalendar
 import com.gst.synccalender.data.remote.api.ApiOauth
 import com.gst.synccalender.utils.network.Api.BASE_URL
-import com.gst.synccalender.utils.network.Api.BASE_URL_OAUTH
 import com.gst.synccalender.utils.network.StringConverterFactory
 import com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -59,7 +58,10 @@ object CalendarModule {
     @Provides
     @Singleton
     @RetrofitWithOauth
-    fun provideRetrofitWithOauth(moshi: Moshi, @OkHttpDefault okHttpClient: OkHttpClient): Retrofit =
+    fun provideRetrofitWithOauth(
+        moshi: Moshi,
+        @OkHttpDefault okHttpClient: OkHttpClient
+    ): Retrofit =
         Retrofit.Builder()
             .client(okHttpClient)
             .addConverterFactory(StringConverterFactory())

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.gst.synccalender.utils.MultiStateView
+        android:id="@+id/view_state"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

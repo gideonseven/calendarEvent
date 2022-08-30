@@ -1,4 +1,4 @@
-package com.gst.synccalender.features.calendar.auth
+package com.gst.synccalender.features.auth
 
 import android.graphics.Bitmap
 import android.net.Uri
@@ -15,8 +15,8 @@ import androidx.navigation.fragment.findNavController
 import com.gst.synccalender.R
 import com.gst.synccalender.databinding.FragmentAuthBinding
 import com.gst.synccalender.databinding.ViewStateErrorBinding
-import com.gst.synccalender.features.calendar.auth.AuthContract.AuthEvent
-import com.gst.synccalender.features.calendar.auth.AuthContract.AuthEffect.NavigateToCalendarFragment
+import com.gst.synccalender.features.auth.AuthContract.AuthEffect.NavigateToCalendarFragment
+import com.gst.synccalender.features.auth.AuthContract.AuthEvent
 import com.gst.synccalender.utils.AppFragment
 import com.gst.synccalender.utils.navigateSafe
 import com.gst.synccalender.utils.network.Api
@@ -138,11 +138,11 @@ class AuthFragment : AppFragment<FragmentAuthBinding>(R.layout.fragment_auth) {
 
     private suspend fun handleEffect() {
         viewModel.effect.collect {
-            when(it){
-                is NavigateToCalendarFragment ->{
+            when (it) {
+                is NavigateToCalendarFragment -> {
                     Timber.e("00000 IM READY TO NAVIGATE ")
                     findNavController().navigateSafe(
-                        AuthFragmentDirections.actionGoToCalendar()
+                        AuthFragmentDirections.actionGoToCalendar(viewModel.accessToken)
                     )
                 }
                 else -> {
