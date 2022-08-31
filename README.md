@@ -1,3 +1,8 @@
-# calendarEvent
+# Add Event to Google Calendar
 
-example using AsyncQueryHandler to Add and Delete Event to Calender without Intent
+## Branch
+- ***[master]***
+> Request Permission Read/Write Calendar *without Intent* - using AsyncQueryHandler to Add and Delete Event
+
+- ***[oauth2_google_calendar_api]***
+> Using Oauth2 + Google Calendar API in Google API Console - retrofit | dagger-hilt | coroutine
